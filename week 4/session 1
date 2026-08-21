@@ -1,0 +1,114 @@
+import java.util.Scanner;
+
+public class ConstraintDrivenBanking {
+
+    static double balance = 10000;
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n===== BANKING SYSTEM =====");
+            System.out.println("1. Check Balance");
+            System.out.println("2. Deposit");
+            System.out.println("3. Withdraw");
+            System.out.println("4. Transfer");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
+
+            choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    System.out.println("Current Balance: Rs." + balance);
+                    break;
+
+                case 2:
+                    System.out.print("Enter deposit amount: ");
+                    double deposit = sc.nextDouble();
+
+                    // Constraint 1: Amount must be positive
+                    if (deposit <= 0) {
+                        System.out.println("Invalid amount.");
+                    } else {
+                        balance += deposit;
+                        System.out.println("Deposit successful.");
+                        System.out.println("Balance: Rs." + balance);
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter withdrawal amount: ");
+                    double withdraw = sc.nextDouble();
+
+                    // Constraint 2: Amount must be positive
+                    // Constraint 3: Cannot withdraw more than balance
+                    if (withdraw <= 0) {
+                        System.out.println("Invalid amount.");
+                    } else if (withdraw > balance) {
+                        System.out.println("Insufficient balance.");
+                    } else {
+                        balance -= withdraw;
+                        System.out.println("Withdrawal successful.");
+                        System.out.println("Balance: Rs." + balance);
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Enter receiver account number: ");
+                    int receiver = sc.nextInt();
+
+                    System.out.print("Enter your account number: ");
+                    int sender = sc.nextInt();
+
+                    // Constraint 4: Sender and receiver cannot be same
+                    if (sender == receiver) {
+                        System.out.println(
+                            "Sender and receiver cannot be the same."
+                        );
+                        break;
+                    }
+
+                    System.out.print("Enter transfer amount: ");
+                    double transfer = sc.nextDouble();
+
+                    // Constraint 5: Transfer amount must be positive
+                    if (transfer <= 0) {
+                        System.out.println("Invalid transfer amount.");
+                    }
+                    // Constraint 6: Transfer cannot exceed balance
+                    else if (transfer > balance) {
+                        System.out.println("Insufficient balance.");
+                    } else {
+                        balance -= transfer;
+                        System.out.println("Transfer successful.");
+                        System.out.println("Balance: Rs." + balance);
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("Thank you for using the system.");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice.");
+            }
+
+        } while (choice != 5);
+
+        sc.close();
+    }
+}
+
+===== BANKING SYSTEM =====
+1. Check Balance
+2. Deposit
+3. Withdraw
+4. Transfer
+5. Exit
+Enter choice: 
+
+
